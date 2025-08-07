@@ -10,8 +10,8 @@ spec:
       image: alpine:3
       env:
         - name: WORKSPACE_SOURCE_PATH
-          value: $(params.source.path)
-      workingDir: $(params.source.path)
+          value: $(workspaces.source.path)
+      workingDir: $(workspaces.source.path)
       securityContext:
         runAsNonRoot: false
         runAsUser: 0
@@ -48,7 +48,7 @@ spec:
     - name: nosetests
       image: python:3.9-slim
       workingDir: $(workspaces.source.path)
-      run: |
+      script: |
           #!/bin/bash
           set -e
           python -m pip install --upgrade pip wheel
